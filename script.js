@@ -3,10 +3,6 @@ let intentos = 6;
 let lista = ['APPLE', 'HOUSE', 'HORSE', 'FUNNY','SHORT',]
 let palabra= lista[Math.floor(Math.random()*lista.length)]
 
-console.log("RAMDOM", Math.floor(Math.random()*lista.length))
-
-console.log("ADIVINAR",palabra)
-
 const UrlApi= 'https://random-word-api.herokuapp.com/word?length=5';
 
 fetch(UrlApi).then(response => response.json()).then(response =>{
