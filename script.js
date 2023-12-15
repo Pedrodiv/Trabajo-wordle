@@ -6,6 +6,21 @@ let palabra= lista[Math.floor(Math.random()*lista.length)]
 console.log("RAMDOM", Math.floor(Math.random()*lista.length))
 
 console.log("ADIVINAR",palabra)
+
+const UrlApi= 'https://random-word-api.herokuapp.com/word?length=5';
+
+fetch(UrlApi).then(response => response.json()).then(response =>{
+    palabra =response[0].toUpperCase();
+    console.log("API:",palabra);
+})
+.catch(err => {
+    console.log('Hubo un problema con el API!:(');
+    let diccionario = ["SHOTT","MOLDS","CLOUR","GIMME","MONEY","HORSE","HEART","LOVER"]
+    palabra = diccionario[Math.floor(Math.random()*diccionario.length)].toUpperCase();
+    console.log("ERROR",palabra);
+})
+
+
 let button = document.getElementById('guess-button')
 
 button.addEventListener('click',intentar)
@@ -17,6 +32,10 @@ function intentar(){
     ROW.className = 'row';
     const INTENTO = leerIntento();
     console.log(INTENTO)
+    if(INTENTO.trim().length !==5){
+        alert("Solo se aceptan palabras de 5 letras")
+        return
+    }
     if(INTENTO===palabra){
         console.log("Ganaste")
         terminar("<h1>GANASTE!</h1")
